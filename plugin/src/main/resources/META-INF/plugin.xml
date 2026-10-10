@@ -1,0 +1,12 @@
+<idea-plugin>
+  <id>io.github.literalstudio</id>
+  <name>Literal Studio</name>
+  <vendor>Literal Studio Contributors</vendor>
+  <description><![CDATA[
+    Project scaffold for a local JSON, JavaScript/TypeScript literal and Python dict/list preview tool.
+    Formatting, validation, conversion and the tool window are planned but not implemented in this build.
+  ]]></description>
+  <!-- 仅声明所有目标 IDE 的基础平台能力，避免强制安装 Python 或 JavaScript 插件。 -->
+  <depends>com.intellij.modules.platform</depends>
+  <!-- 此阶段不注册界面或动作；后续实现完成后再声明相应扩展。 -->
+</idea-plugin>

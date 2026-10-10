@@ -1,0 +1,28 @@
+name: literal-studio
+
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: literal-studio-builder:gradle9.3.0-jdk25
+    working_dir: /workspace
+    init: true
+    # 固定构建内存上限，减少 SDK 下载和构建对同机其他容器的影响。
+    mem_limit: 2g
+    memswap_limit: 2g
+    environment:
+      GRADLE_USER_HOME: /home/gradle/.gradle
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+      # 下载缓存独立于其他项目，重复运行无需再次下载 Gradle 和 IDE SDK。
+      - type: volume
+        source: gradle-cache
+        target: /home/gradle/.gradle
+    command: ["help"]
+
+volumes:
+  gradle-cache:
+    name: literal-studio_gradle-home

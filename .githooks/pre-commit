@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+
+# 使用完整暂存区检查文本和身份，阻止本机路径或个人邮箱进入新提交。
+cd "$(git rev-parse --show-toplevel)"
+exec sh scripts/check-public-content.sh --staged

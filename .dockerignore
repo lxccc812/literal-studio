@@ -1,0 +1,9 @@
+.git
+.idea
+.gradle
+.kotlin
+.intellijPlatform
+**/build
+out
+.env*
+*.log

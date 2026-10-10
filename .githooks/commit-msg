@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+
+# 提交说明同样属于公开信息，不允许在修复说明中再次复述个人路径或邮箱。
+exec sh scripts/check-public-content.sh --message "$1"
