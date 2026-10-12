@@ -2,9 +2,9 @@
 
 JetBrains IDE 插件项目，目标是在 IDE 内直接预览和转换 JSON、JS/TS Object/Array 与 Python dict/list 数据。
 
-**当前状态：工程初始化。尚未实现输入/输出界面、识别、检查、格式化或转换。**
+**当前版本：0.1.0。已实现核心处理与 Tool Window，并在 PyCharm 完成安装和基本使用确认。自动验证结果与人工验收边界见 [开发说明](docs/development.md)。**
 
-## 初版目标
+## 初版功能
 
 - Tool Window 上方输入、下方格式化输出，可拖动分隔条调整高度。
 - 自动识别 JSON、JS/TS 数据字面量、Python dict/list；允许手动指定输入格式。
@@ -18,7 +18,7 @@ JetBrains IDE 插件项目，目标是在 IDE 内直接预览和转换 JSON、JS
 ## 工程结构
 
 ```text
-core/                 独立 Kotlin/JVM 核心，预留解析与转换测试目录
+core/                 独立 Kotlin/JVM 解析、校验、转换与测试
 plugin/               IntelliJ Platform 接入与插件描述文件
 scripts/              容器构建入口
 gradle/wrapper/       官方 Gradle Wrapper
@@ -41,7 +41,15 @@ docker compose run --rm builder :core:check
 docker compose run --rm builder :plugin:buildPlugin
 ```
 
-生成的安装包位于 `plugin/build/distributions/`。当前包仅是元数据工程骨架，安装后没有工具窗口或格式化功能。
+生成的安装包位于 `plugin/build/distributions/`。在已有 PyCharm 中通过 Install Plugin from Disk 安装 ZIP 后，从 View → Tool Windows → Literal Studio 打开窗口。
+
+上方粘贴数据，停止输入约 400 ms 后，下方显示只读格式化结果。可手动指定输入语言、选择目标输出格式，使用“格式检查”“格式化”和“复制输出”。错误会显示原文中的行列位置并清空旧预览；自动识别遇到歧义时显示备选语言。
+
+界面采用 IDE 原生控件、字体与分隔条。选择框和操作按钮保持紧凑宽度，窄侧栏自动折行；“复制输出”位于输出区标题栏，状态提示通过图标、文字和主题色区分检查结果。
+
+复制成功后，按钮显示“复制成功”及勾号，约 2 秒后恢复；连续复制会延长提示时间，输入变化会立即清除旧提示。
+
+首版处理纯数据字面量，不执行变量、函数或完整程序。重复 key 和不能表示的转换明确报错，数字精度风险明确提示。完整语法边界见 [初版需求](docs/requirements.md)。
 
 初次构建会联网下载镜像、Gradle、Maven 依赖和 PyCharm SDK；项目运行时的离线目标不意味着首次构建不需要网络。
 

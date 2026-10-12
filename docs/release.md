@@ -2,6 +2,12 @@
 
 工程已开源，当前不配置 CI、Marketplace token 或自动发布。
 
+## 首版基线
+
+首版版本号为 `0.1.0`，包含数据字面量检查、格式化、格式互转及 Literal Studio 工具窗口。已在 PyCharm 完成从磁盘安装和基本使用确认；完整跨主题、缩放、生命周期及其他产品兼容验收仍按开发清单记录。
+
+本阶段提交并推送源码到远程 `main`。安装 ZIP 通过 Docker Compose 本地构建，不提交到 Git；GitHub Release、tag 和 Marketplace 发布在后续明确需要时处理。
+
 ## 本地阶段
 
 1. 实现初版并通过核心测试、插件构建和真实 PyCharm 界面验收。

@@ -1,6 +1,6 @@
 # 项目工作约定
 
-- 当前阶段仅初始化工程。未经后续明确指示，不实现解析器、格式化、转换或 Tool Window 功能。
+- 当前阶段实现已确认的初版功能，范围以 docs/requirements.md 为准；新增完整程序解析、树形预览或编辑器原地修改须另行确认。
 - 项目是公开仓库；推送及 Marketplace 发布须分别得到明确授权。
 - 使用 Kotlin 与 IntelliJ Platform SDK。核心模块不得依赖 IDE、Python 或 Node.js 解释器。
 - JDK、Gradle、编译和测试通过 Docker Compose 运行。不要在宿主机安装或自动下载开发环境。

@@ -17,16 +17,30 @@ docker compose run --rm builder :core:check
 docker compose run --rm builder check
 docker compose run --rm builder :plugin:buildPlugin
 docker compose run --rm builder :plugin:verifyPluginProjectConfiguration
+docker compose run --rm builder :plugin:verifyPlugin
 ```
 
-`core` 当前没有测试用例，`check` 成功或 `test NO-SOURCE` 只说明工程任务可以运行，不证明任何解析行为正确。
-生成的 ZIP 在 `plugin/build/distributions/`。初始化阶段没有 Tool Window 注册，安装后不会出现界面入口。
+`core` 使用纯 JVM 测试验证识别、互转、字符串、数值、重复 key、错误位置及限额；测试不依赖 IDE 或外部解释器。
+生成的 ZIP 在 `plugin/build/distributions/`，工具窗口注册为 Literal Studio。容器编译和打包通过不等于 IDE 界面已验收。
 
 ## 后续界面验收
 
 容器内的 `runIde` 不能直接在 Windows 显示图形窗口。本项目采用“容器构建 ZIP → 已有 IDE 从磁盘安装”的流程。
-后续实现界面后，在 PyCharm 的 Settings → Plugins → 齿轮 → Install Plugin from Disk 中选择 ZIP，按 IDE 提示重启并执行人工验收。
+在 PyCharm 的 Settings → Plugins → 齿轮 → Install Plugin from Disk 中选择 ZIP，按 IDE 提示重启并执行人工验收。
 仅为测试插件，可以使用现有 IDE 的独立配置目录；是否需要该流程在界面实现阶段再决定。
+
+人工验收清单（使用虚构输入，截图不包含真实项目或账号）：
+
+- 从 View → Tool Windows 打开 Literal Studio，上下编辑器可拖动分隔条；上方可编辑，下方只读可选择复制。
+- 将窗口从窄侧栏调整为宽窗口，确认选择框、标题和按钮完整可见，不横向拉满；“复制输出”在输出区标题栏。
+- 检查深色/浅色主题与 IDE 缩放，确认字体、边框、分隔条及信息/成功/警告/错误提示统一且易读。
+- 输入 `{"items":[1,true,null]}`、`{items:[1,true,null,]}`、`{'items':[1,True,None,]}`，确认自动识别与三种输出模式。
+- 输入停止约 400 ms 后自动出结果；“格式检查”只显示诊断，“格式化”生成输出，上方原文保持不变。
+- 点击“复制输出”后，按钮短暂显示“复制成功”和勾号；粘贴验证内容一致，约 2 秒后按钮恢复。连续点击及复制后修改输入时，检查提示延期和及时清除。
+- 在成功输入后追加非法字符，确认旧输出和复制按钮立即失效，并展示错误行列。
+- 快速连续粘贴、切换输入/输出模式并点击按钮，确认旧后台任务不会覆盖最新输入。
+- 重复 key、Python 非字符串 key 转 JSON、变量表达式、大整数和浮点范围分别按需求报错或提示。
+- 关闭项目、重新打开窗口及卸载插件，检查编辑器和后台任务释放情况。窗口隐藏只隐藏界面；内容释放时才销毁资源。
 
 ## 缓存与排查
 
@@ -37,4 +51,4 @@ Compose 使用项目专用的 `literal-studio_gradle-home` volume。常规运行
 
 ## 验证记录
 
-初始化的实际验证结果记录在 [初始化验证](bootstrap-verification.md)。需求文档中的能力仍属于待实现内容。
+初始化的历史验证结果记录在 [初始化验证](bootstrap-verification.md)。本阶段自动验证记录与尚未完成的人工验收见 [初版验证](first-version-verification.md)。
