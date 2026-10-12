@@ -78,8 +78,16 @@ SHA-256：`B01CD4AEDBC6DE0A479DF3B24A89B810C5C4D87B92D93199C91A6E90B3B66BEC`。
 
 Docker Compose 再次执行 `check :plugin:buildPlugin :plugin:verifyPluginProjectConfiguration :plugin:verifyPlugin`，退出码 0。27 个核心用例的成功结果命中缓存，3 个布局用例重新执行通过；正式版本 Plugin Verifier 结论为 Compatible，仍有 4 条弃用、6 条实验 API 默认方法桥接提示，无二进制兼容错误。
 
-源码、中文注释、测试说明及通用 Git 身份完成公开内容核查，安装包类与资源未发现个人标识或本机路径。首版源码推送到 `main`，不提交构建产物，不创建 tag、GitHub Release 或 Marketplace 发布。
+源码、中文注释、测试说明及通用 Git 身份完成公开内容核查，安装包类与资源未发现个人标识或本机路径。首版源码提交阶段推送到 `main`，不提交构建产物；之后的 GitHub 分发结果见下方记录。
 
 正式安装包：`plugin/build/distributions/plugin-0.1.0.zip`，75739 字节。
 
 SHA-256：`A0E7E2BC50300F4E2DBC86D29F0CB91C92103155A6EB3ACB34911E4A2C77F0D8`。
+
+## GitHub Releases 分发
+
+日期：2026-10-12。`v0.1.0` 已公开发布为 Latest，非草稿、非预发布，tag 指向首版提交 `daa893f1e923779777c3f6d123e2ee586b93f74d`。
+
+Release 包含 `plugin-0.1.0.zip`（75739 字节）和 `SHA256SUMS`，提供安装步骤、功能、语法边界与当前兼容验证说明。上传后核对资产状态及 GitHub 返回的 SHA-256，插件 ZIP 与上方正式安装包一致；公开发布后再次核验 Release 状态、资产与远程 tag，并以未登录请求下载两个资产，确认公开下载的插件、校验清单和本地构建完全一致。
+
+构建产物通过 Releases 分发，仍不提交到 Git。Marketplace 尚未发布。

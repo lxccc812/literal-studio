@@ -1,4 +1,4 @@
-# 后续发布准备
+# 发布与分发
 
 工程已开源，当前不配置 CI、Marketplace token 或自动发布。
 
@@ -6,7 +6,9 @@
 
 首版版本号为 `0.1.0`，包含数据字面量检查、格式化、格式互转及 Literal Studio 工具窗口。已在 PyCharm 完成从磁盘安装和基本使用确认；完整跨主题、缩放、生命周期及其他产品兼容验收仍按开发清单记录。
 
-本阶段提交并推送源码到远程 `main`。安装 ZIP 通过 Docker Compose 本地构建，不提交到 Git；GitHub Release、tag 和 Marketplace 发布在后续明确需要时处理。
+首版源码已推送到远程 `main`，`v0.1.0` 已在 GitHub Releases 公开发布并标记为 Latest，tag 指向首版提交。分发资产为 `plugin-0.1.0.zip` 和 `SHA256SUMS`，安装 ZIP 通过 Docker Compose 构建，不提交到 Git。
+
+从 Releases 的 Assets 下载插件 ZIP 后，可在 PyCharm 中通过 Install Plugin from Disk 安装。Marketplace 尚未发布，仍在后续单独确认范围内。
 
 ## 本地阶段
 

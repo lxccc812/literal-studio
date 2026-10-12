@@ -27,7 +27,15 @@ Dockerfile            Gradle 9.3.0 + JDK 25 构建镜像
 compose.yaml          单次构建服务和项目专用下载缓存
 ```
 
-## 快速开始
+## 安装发布版
+
+进入仓库的 Releases 页面，选择 `v0.1.0`，在 Assets 中下载 `plugin-0.1.0.zip`，无需解压。
+
+在 PyCharm 中打开 Settings → Plugins → 齿轮 → Install Plugin from Disk，选择插件 ZIP，按 IDE 提示重启，然后从 View → Tool Windows → Literal Studio 打开窗口。
+
+Assets 中的 `SHA256SUMS` 可用于校验下载文件。GitHub 自动提供的 Source code ZIP / tar.gz 是源码归档，不是插件安装包。
+
+## 从源码构建
 
 宿主机只需现有 Git、Docker Desktop（Linux containers）与 Docker Compose。不需要安装 JDK、Kotlin、Gradle、Python 或 Node.js。
 
